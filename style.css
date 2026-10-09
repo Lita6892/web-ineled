@@ -878,3 +878,32 @@ footer p {
         font-size: 18px;
     }
 }
+
+/* Productos: catálogo y cotización directa por WhatsApp */
+#productos { scroll-margin-top: 18px; }
+.productos { padding: 50px; background: var(--gris); }
+.productos-contenido { max-width: 1100px; margin: 0 auto; }
+.productos h2 { margin: 0 0 18px; text-align: center; font-size: 42px; color: var(--negro); }
+.productos h2::after { content: ""; display: block; width: 60px; height: 4px; background: var(--verde); margin: 10px auto 0; }
+.productos-intro { max-width: 750px; margin: 0 auto 30px; text-align: center; font-size: 17px; line-height: 1.6; }
+.productos-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 20px; }
+.producto-card { overflow: hidden; display: flex; flex-direction: column; border-radius: 8px; background: white; border-top: 3px solid var(--verde); box-shadow: 0 4px 12px #00000014; }
+.producto-foto { position: relative; overflow: hidden; background: #f2f2f2; }
+.producto-foto img { position: absolute; display: block; max-width: none; height: auto; }
+.producto-foto-reflector { aspect-ratio: 390 / 370; }
+.producto-foto-reflector img { width: 262.564%; left: -12.821%; top: -83.784%; }
+.producto-foto-cable { aspect-ratio: 435 / 240; }
+.producto-foto-cable img { width: 235.402%; left: -9.195%; top: -360.417%; }
+.producto-foto-cordon { aspect-ratio: 310 / 235; }
+.producto-foto-cordon img { width: 330.323%; left: -164.516%; top: -404.255%; }
+.producto-info { display: flex; flex-direction: column; flex: 1; padding: 20px; }
+.producto-info h3 { color: var(--negro); font-size: 21px; line-height: 1.25; margin: 0 0 12px; }
+.producto-descripcion { font-size: 15px; line-height: 1.6; margin: 0 0 18px; }
+.producto-precio { color: var(--verde-oscuro); font-size: 29px; font-weight: bold; margin: auto 0 20px; }
+.producto-precio span { display: block; color: #555; font-size: 14px; font-weight: normal; margin-top: 5px; }
+.producto-whatsapp { display: flex; justify-content: space-between; gap: 8px; padding: 13px 14px; border-radius: 5px; background: var(--verde-oscuro); color: white; font-weight: bold; font-size: 14px; text-decoration: none; line-height: 1.4; }
+.producto-whatsapp:hover { background: var(--negro); }
+.producto-whatsapp:focus-visible { outline: 3px solid var(--negro); outline-offset: 3px; }
+.productos-nota { text-align: center; color: #555; font-size: 14px; line-height: 1.6; margin: 24px 0 0; }
+@media (max-width: 1000px) { .productos-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } .menu { gap: 18px; flex-wrap: wrap; } }
+@media (max-width: 600px) { .productos { padding: 40px 20px; } .productos h2 { font-size: 32px; } .productos-grid { grid-template-columns: 1fr; max-width: 420px; margin: auto; } .producto-foto { max-height: 280px; } .productos-intro { font-size: 16px; } #productos { scroll-margin-top: 12px; } }
