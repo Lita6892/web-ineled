@@ -598,5 +598,278 @@
     comuna.addEventListener("change", actualizarTotal);
     actualizarTotal();
   </script>
+  <script>
+(() => {
+  const URL_PEDIDOS =
+    "https://script.google.com/macros/s/AKfycbyjNbn0AAjqTU-YI1lEkfwNAfi1fNkMlCUpKLlLtzTjrHLOS0iQMmmUbUkm2e6L-QXQ-A/exec";
+
+  const CLAVE_PENDIENTE = "ineled-pedido-pendiente";
+  const botonAnterior = document.querySelector(
+    'button[aria-describedby="estado-pedidos"]'
+  );
+  const avisoAnterior = document.getElementById("estado-pedidos");
+
+  if (!botonAnterior) return;
+
+  const formulario = document.createElement("form");
+  formulario.id = "pedido-web";
+  formulario.innerHTML = `
+    <h2>Datos para la entrega</h2>
+
+    <p>
+      <label for="pedido-nombre">Nombre y apellido</label>
+      <input id="pedido-nombre" name="nombre"
+        autocomplete="name" minlength="2" maxlength="100" required>
+    </p>
+
+    <p>
+      <label for="pedido-correo">Correo electrónico</label>
+      <input id="pedido-correo" name="correo" type="email"
+        autocomplete="email" maxlength="150" required>
+    </p>
+
+    <p>
+      <label for="pedido-telefono">Teléfono de contacto</label>
+      <input id="pedido-telefono" name="telefono" type="tel"
+        autocomplete="tel" minlength="8" maxlength="30"
+        pattern="[+0-9 ()\\-]{8,30}" required>
+    </p>
+
+    <p>
+      <label for="pedido-direccion">
+        Calle, número y departamento o casa
+      </label>
+      <input id="pedido-direccion" name="direccion"
+        autocomplete="street-address"
+        minlength="5" maxlength="200" required>
+    </p>
+
+    <div hidden aria-hidden="true">
+      <label for="pedido-sitio">Sitio web</label>
+      <input id="pedido-sitio" name="sitioWeb"
+        tabindex="-1" autocomplete="off">
+    </div>
+
+    <p>
+      <label style="font-weight:400;display:flex;gap:10px;align-items:flex-start">
+        <input name="condiciones" type="checkbox" required
+          style="width:20px;min-height:20px;flex-shrink:0;margin-top:4px">
+        <span>
+          Revisé el producto, color, cantidad, comuna y total.
+          Acepto las condiciones de entrega y la
+          <a href="https://www.ineled.cl/devoluciones.html"
+            target="_blank" rel="noopener noreferrer">
+            política de devoluciones y garantía
+          </a>.
+          Autorizo el uso de mis datos para gestionar este pedido
+          y recibir su confirmación por correo.
+        </span>
+      </label>
+    </p>
+
+    <button type="submit"
+      style="background:#006b30;color:white;cursor:pointer">
+      Confirmar pedido
+    </button>
+
+    <p id="pedido-estado" role="status" aria-live="polite"></p>
+
+    <p class="nota">
+      Recibirás el detalle y las instrucciones de transferencia
+      por correo. El pago queda pendiente de verificación.
+    </p>
+  `;
+
+  botonAnterior.replaceWith(formulario);
+  if (avisoAnterior) avisoAnterior.remove();
+
+  const boton = formulario.querySelector('button[type="submit"]');
+  const estado = document.getElementById("pedido-estado");
+  const color = document.getElementById("color");
+  const cantidad = document.getElementById("cantidad");
+  const comuna = document.getElementById("comuna");
+  const controles = [
+    ...formulario.querySelectorAll("input"),
+    color,
+    cantidad,
+    comuna
+  ];
+
+  let pendiente = null;
+  let completado = false;
+
+  function bloquearDatos(bloquear) {
+    controles.forEach(control => {
+      control.disabled = bloquear;
+    });
+  }
+
+  function guardarPendiente() {
+    try {
+      sessionStorage.setItem(
+        CLAVE_PENDIENTE,
+        JSON.stringify(pendiente)
+      );
+    } catch (error) {
+      // El pedido sigue disponible en memoria durante esta visita.
+    }
+  }
+
+  try {
+    const guardado = sessionStorage.getItem(CLAVE_PENDIENTE);
+    if (guardado) {
+      const recuperado = JSON.parse(guardado);
+      if (
+        recuperado &&
+        typeof recuperado.id === "string" &&
+        typeof recuperado.nombre === "string"
+      ) {
+        pendiente = recuperado;
+      }
+    }
+  } catch (error) {
+    pendiente = null;
+  }
+
+  if (pendiente) {
+    ["nombre", "correo", "telefono", "direccion"].forEach(campo => {
+      formulario.elements[campo].value = pendiente[campo] || "";
+    });
+
+    color.value = pendiente.color;
+    cantidad.value = pendiente.cantidad;
+    comuna.value = pendiente.comuna;
+    formulario.elements.condiciones.checked = true;
+    cantidad.dispatchEvent(new Event("input"));
+    comuna.dispatchEvent(new Event("change"));
+
+    bloquearDatos(true);
+    boton.textContent = "Comprobar o reintentar pedido";
+    estado.textContent =
+      "Hay un pedido pendiente de confirmación. " +
+      "Pulsa el botón para comprobarlo con el mismo identificador.";
+  }
+
+  formulario.addEventListener("submit", async evento => {
+    evento.preventDefault();
+    if (completado || boton.disabled) return;
+
+    if (!pendiente) {
+      if (!formulario.reportValidity()) return;
+
+      const numeroRollos = Number(cantidad.value);
+
+      if (
+        !Number.isInteger(numeroRollos) ||
+        numeroRollos < 1 ||
+        numeroRollos > 20
+      ) {
+        estado.textContent = "Selecciona entre 1 y 20 rollos.";
+        cantidad.focus();
+        return;
+      }
+
+      if (!comuna.value) {
+        estado.textContent = "Selecciona una comuna de entrega.";
+        comuna.focus();
+        return;
+      }
+
+      pendiente = {
+        id: crypto.randomUUID(),
+        nombre: formulario.elements.nombre.value.trim(),
+        correo: formulario.elements.correo.value.trim(),
+        telefono: formulario.elements.telefono.value.trim(),
+        direccion: formulario.elements.direccion.value.trim(),
+        comuna: comuna.value,
+        color: color.value,
+        cantidad: numeroRollos,
+        aceptaCondiciones: formulario.elements.condiciones.checked,
+        sitioWeb: formulario.elements.sitioWeb.value
+      };
+
+      guardarPendiente();
+    }
+
+    bloquearDatos(true);
+    boton.disabled = true;
+    boton.textContent = "Registrando pedido…";
+    estado.textContent = "Espera mientras confirmamos el registro.";
+
+    const controlador = new AbortController();
+    const temporizador = setTimeout(() => controlador.abort(), 60000);
+
+    try {
+      const respuesta = await fetch(URL_PEDIDOS, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(pendiente),
+        credentials: "omit",
+        signal: controlador.signal
+      });
+
+      if (!respuesta.ok) {
+        throw new Error("Respuesta de conexión incompleta.");
+      }
+
+      const resultado = await respuesta.json();
+
+      if (
+        resultado.ok !== true ||
+        resultado.pedido !== pendiente.id ||
+        !Number.isFinite(resultado.total)
+      ) {
+        throw new Error(
+          resultado.mensaje || "El servidor no confirmó el pedido."
+        );
+      }
+
+      completado = true;
+
+      try {
+        sessionStorage.removeItem(CLAVE_PENDIENTE);
+      } catch (error) {
+        // El registro confirmado permanece en la hoja de INELED.
+      }
+
+      const importe = new Intl.NumberFormat("es-CL", {
+        style: "currency",
+        currency: "CLP",
+        maximumFractionDigits: 0
+      }).format(resultado.total);
+
+      estado.textContent =
+        "Pedido registrado. Número: " + resultado.pedido +
+        ". Total: " + importe + " CLP. ";
+
+      if (resultado.correoEnviado) {
+        estado.textContent +=
+          "Enviamos el detalle a tu correo. Revisa también spam. " +
+          "Encontrarás los datos de transferencia más abajo.";
+      } else {
+        estado.textContent +=
+          "El envío del correo quedó pendiente. " +
+          "Contacta a tmerchan@ineled.cl indicando este número " +
+          "para confirmar las instrucciones de pago.";
+      }
+
+      boton.textContent = "Pedido registrado";
+    } catch (error) {
+      estado.textContent =
+        "No pudimos confirmar el resultado. " +
+        "Pulsa «Comprobar o reintentar pedido» para consultar " +
+        "o enviar nuevamente el mismo pedido. " +
+        "Si el problema continúa, escribe a tmerchan@ineled.cl " +
+        "e indica el número " + pendiente.id + ".";
+      boton.textContent = "Comprobar o reintentar pedido";
+    } finally {
+      clearTimeout(temporizador);
+      boton.disabled = completado;
+    }
+  });
+})();
+</script>
 </body>
 </html>
