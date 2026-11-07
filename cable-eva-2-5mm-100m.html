@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Cable EVA flexible 2,5 mm² · 100 m | INELED</title>
+
+  <meta name="description"
+    content="Cable Madeco by Nexans FREETOX FLEX de 2,5 mm², rollo de 100 metros. $43.000 IVA incluido. Despacho a 13 comunas de Santiago.">
+
+  <link rel="canonical"
+    href="https://ineled.cl/cable-eva-2-5mm-100m.html">
+
+  <style>
+    :root {
+      --negro: #111111;
+      --verde: #009640;
+      --verde-oscuro: #006b30;
+      --gris: #626762;
+      --borde: #dce3dc;
+      --fondo: #f5f7f4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--negro);
+      background: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--verde-oscuro);
+      text-underline-offset: 3px;
+    }
+
+    header {
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .cabecera {
+      max-width: 1120px;
+      margin: auto;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .marca {
+      color: var(--negro);
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    .marca span {
+      color: var(--verde);
+    }
+
+    main {
+      max-width: 1120px;
+      margin: auto;
+      padding: 32px 20px 56px;
+    }
+
+    .producto {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    .foto {
+      width: 100%;
+      max-height: 620px;
+      object-fit: contain;
+      display: block;
+      background: var(--fondo);
+      border-radius: 12px;
+    }
+
+    figcaption {
+      margin-top: 12px;
+      color: var(--gris);
+      font-size: 14px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.15;
+      margin: 8px 0 20px;
+    }
+
+    h2 {
+      font-size: 23px;
+      line-height: 1.3;
+      margin-top: 0;
+    }
+
+    .fabricante {
+      color: var(--gris);
+      margin: 0;
+    }
+
+    .precio {
+      margin: 20px 0 0;
+      font-size: 38px;
+      font-weight: 800;
+    }
+
+    .impuestos {
+      margin: 0 0 24px;
+      color: var(--gris);
+    }
+
+    .campos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    input,
+    select,
+    button {
+      font: inherit;
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 48px;
+      padding: 10px 12px;
+      border: 1px solid #a7b1a7;
+      border-radius: 6px;
+      background: white;
+      color: var(--negro);
+    }
+
+    input:focus,
+    select:focus,
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #80c99f;
+      outline-offset: 3px;
+    }
+
+    .campo-comuna {
+      margin-top: 18px;
+    }
+
+    .resumen {
+      background: var(--fondo);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 24px 0 16px;
+    }
+
+    .fila {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 8px 0;
+    }
+
+    .total {
+      border-top: 1px solid var(--borde);
+      padding-top: 14px;
+      margin-top: 14px;
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .nota {
+      color: var(--gris);
+      font-size: 14px;
+    }
+
+    .error {
+      color: #a12121;
+    }
+
+    button {
+      width: 100%;
+      min-height: 50px;
+      border: 0;
+      border-radius: 6px;
+      padding: 12px 18px;
+      font-weight: 700;
+    }
+
+    button:disabled {
+      background: #e5e9e5;
+      color: #535b53;
+      cursor: not-allowed;
+    }
+
+    .informacion {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      border-top: 1px solid var(--borde);
+      padding-top: 32px;
+      margin-top: 48px;
+    }
+
+    .informacion section {
+      min-width: 0;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    dl {
+      margin: 0;
+    }
+
+    .dato {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    dt {
+      font-weight: 700;
+    }
+
+    dd {
+      margin: 2px 0 0;
+    }
+
+    footer {
+      background: var(--negro);
+      color: white;
+      padding: 26px 20px;
+      text-align: center;
+    }
+
+    footer a {
+      color: white;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 740px) {
+      .producto,
+      .informacion {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      main {
+        padding-top: 24px;
+      }
+
+      .foto {
+        max-height: 460px;
+      }
+
+      .cabecera {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="cabecera">
+      <a class="marca" href="./" aria-label="INELED, inicio">
+        INE<span>LED</span>
+      </a>
+      <a href="./#productos">Ver todos los productos</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="producto">
+      <figure>
+        <img
+          class="foto"
+          src="imagenes/productos/cable-eva-2-5mm-rojo.jpeg"
+          alt="Rollo rojo de cable Madeco by Nexans FREETOX FLEX de 2,5 mm² y 100 metros"
+          width="1200"
+          height="1600">
+        <figcaption>
+          Fotografía del rollo rojo. Colores disponibles para elegir:
+          rojo, verde, blanco y negro.
+        </figcaption>
+      </figure>
+
+      <section aria-labelledby="titulo-producto">
+        <p class="fabricante">Madeco by Nexans · FREETOX FLEX</p>
+
+        <h1 id="titulo-producto">
+          Cable EVA flexible de 2,5 mm²
+        </h1>
+
+        <p>
+          Rollo de <strong>100 metros</strong>, con conductor de cobre
+          flexible multifilar y aislación libre de halógenos.
+        </p>
+
+        <p class="precio">$43.000</p>
+        <p class="impuestos">CLP por rollo · IVA incluido</p>
+
+        <div class="campos">
+          <div>
+            <label for="color">Color</label>
+            <select id="color">
+              <option value="Rojo">Rojo</option>
+              <option value="Verde">Verde</option>
+              <option value="Blanco">Blanco</option>
+              <option value="Negro">Negro</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="cantidad">Cantidad de rollos</label>
+            <input
+              id="cantidad"
+              type="number"
+              min="1"
+              max="20"
+              step="1"
+              value="1"
+              inputmode="numeric"
+              aria-describedby="limite-cantidad">
+          </div>
+        </div>
+
+        <p class="nota" id="limite-cantidad">
+          Despacho de $5.900 por pedido de 1 a 20 rollos.
+        </p>
+
+        <div class="campo-comuna">
+          <label for="comuna">Comuna de entrega</label>
+          <select id="comuna" required>
+            <option value="">Selecciona tu comuna</option>
+            <option>El Bosque</option>
+            <option>La Cisterna</option>
+            <option>La Florida</option>
+            <option>La Granja</option>
+            <option>La Reina</option>
+            <option>Las Condes</option>
+            <option>Macul</option>
+            <option>Ñuñoa</option>
+            <option>Peñalolén</option>
+            <option>Providencia</option>
+            <option>San Joaquín</option>
+            <option>San Miguel</option>
+            <option>Vitacura</option>
+          </select>
+        </div>
+
+        <div class="resumen" aria-live="polite" aria-atomic="true">
+          <div class="fila">
+            <span>Productos</span>
+            <strong id="subtotal">$43.000</strong>
+          </div>
+          <div class="fila">
+            <span>Despacho</span>
+            <strong id="valor-despacho">Selecciona comuna</strong>
+          </div>
+          <div class="fila total">
+            <span>Total</span>
+            <span id="total">—</span>
+          </div>
+          <p class="nota" id="mensaje-calculo">
+            Selecciona una comuna para calcular el total.
+          </p>
+        </div>
+
+        <button type="button" disabled aria-describedby="estado-pedidos">
+          Confirmar pedido — próximamente
+        </button>
+
+        <p class="nota" id="estado-pedidos">
+          Estamos habilitando la compra desde esta página.
+          Para comprar ahora,
+          <a
+            href="https://wa.me/56951810842?text=Hola%2C%20quiero%20comprar%20cable%20EVA%202%2C5%20mm%C2%B2%20en%20rollo%20de%20100%20metros."
+            target="_blank"
+            rel="noopener noreferrer">
+            contáctanos por WhatsApp
+          </a>.
+        </p>
+
+        <noscript>
+          <p>
+            Activa JavaScript para calcular el total.
+            Cada rollo cuesta $43.000 y el despacho cuesta
+            $5.900 por pedido de 1 a 20 rollos.
+          </p>
+        </noscript>
+      </section>
+    </div>
+
+    <div class="informacion">
+      <section aria-labelledby="caracteristicas">
+        <h2 id="caracteristicas">Características del producto</h2>
+
+        <dl>
+          <div class="dato">
+            <dt>Marca y línea</dt>
+            <dd>Madeco by Nexans · FREETOX FLEX</dd>
+          </div>
+          <div class="dato">
+            <dt>Sección del conductor</dt>
+            <dd>2,5 mm²</dd>
+          </div>
+          <div class="dato">
+            <dt>Presentación</dt>
+            <dd>Rollo de 100 metros</dd>
+          </div>
+          <div class="dato">
+            <dt>Conductor</dt>
+            <dd>Cobre flexible multifilar</dd>
+          </div>
+          <div class="dato">
+            <dt>Aislación</dt>
+            <dd>Libre de halógenos</dd>
+          </div>
+          <div class="dato">
+            <dt>Colores disponibles</dt>
+            <dd>Rojo, verde, blanco y negro</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="entrega">
+        <h2 id="entrega">Despacho a domicilio</h2>
+
+        <p>
+          Valor fijo de <strong>$5.900</strong> por pedido de
+          <strong>1 a 20 rollos</strong>. Entregamos de lunes a sábado,
+          según el horario de Santiago de Chile.
+        </p>
+
+        <ul>
+          <li>
+            Con stock y pedido recibido hasta las
+            <strong>14:00</strong>, el cliente recibe el producto
+            el mismo día.
+          </li>
+          <li>
+            Con stock y pedido recibido después de las
+            <strong>14:00</strong>, la entrega se realiza el siguiente
+            día de operación.
+          </li>
+          <li>
+            Si falta stock, se agrega un día de operación al plazo
+            correspondiente.
+          </li>
+        </ul>
+
+        <p>
+          Cobertura en El Bosque, La Cisterna, La Florida, La Granja,
+          La Reina, Las Condes, Macul, Ñuñoa, Peñalolén, Providencia,
+          San Joaquín, San Miguel y Vitacura.
+        </p>
+      </section>
+
+      <section aria-labelledby="pago">
+        <h2 id="pago">Pago por transferencia</h2>
+
+        <p>
+          Al coordinar tu compra, utiliza los siguientes datos y envía
+          el comprobante a
+          <a href="mailto:tmerchan@ineled.cl">tmerchan@ineled.cl</a>.
+        </p>
+
+        <dl>
+          <div class="dato">
+            <dt>Titular</dt>
+            <dd>Tania Merchan</dd>
+          </div>
+          <div class="dato">
+            <dt>RUT</dt>
+            <dd>22.189.628-9</dd>
+          </div>
+          <div class="dato">
+            <dt>Banco</dt>
+            <dd>Banco Consorcio</dd>
+          </div>
+          <div class="dato">
+            <dt>Tipo de cuenta</dt>
+            <dd>Cuenta Más</dd>
+          </div>
+          <div class="dato">
+            <dt>Número de cuenta</dt>
+            <dd>4011447496</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="devoluciones">
+        <h2 id="devoluciones">Devoluciones y atención</h2>
+
+        <p>
+          Consulta los plazos, condiciones y procedimiento en nuestra
+          <a href="https://www.ineled.cl/devoluciones.html">
+            política de devoluciones y garantía
+          </a>.
+        </p>
+
+        <p>
+          Coordinamos las devoluciones en La Florida a través de
+          <a href="mailto:tmerchan@ineled.cl">tmerchan@ineled.cl</a>.
+        </p>
+
+        <p>
+          Para consultas comerciales, llámanos al
+          <a href="tel:+56951810842">+56 9 5181 0842</a>
+          o escribe a
+          <a href="mailto:ecornejo@ineled.cl">ecornejo@ineled.cl</a>.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>INELED · Instalaciones eléctricas e iluminación LED</p>
+    <a href="./">Volver al inicio</a>
+  </footer>
+
+  <script>
+    const precioRollo = 43000;
+    const costoDespacho = 5900;
+
+    const cantidad = document.getElementById("cantidad");
+    const comuna = document.getElementById("comuna");
+    const subtotal = document.getElementById("subtotal");
+    const despacho = document.getElementById("valor-despacho");
+    const total = document.getElementById("total");
+    const mensaje = document.getElementById("mensaje-calculo");
+
+    const pesos = new Intl.NumberFormat("es-CL", {
+      style: "currency",
+      currency: "CLP",
+      maximumFractionDigits: 0
+    });
+
+    function actualizarTotal() {
+      const numeroRollos = Number(cantidad.value);
+      const cantidadValida =
+        Number.isInteger(numeroRollos) &&
+        numeroRollos >= 1 &&
+        numeroRollos <= 20;
+
+      cantidad.setAttribute("aria-invalid", String(!cantidadValida));
+      mensaje.classList.toggle("error", !cantidadValida);
+
+      if (!cantidadValida) {
+        subtotal.textContent = "—";
+        despacho.textContent = "—";
+        total.textContent = "—";
+        mensaje.textContent = "Ingresa una cantidad entera entre 1 y 20 rollos.";
+        return;
+      }
+
+      const valorProductos = numeroRollos * precioRollo;
+      subtotal.textContent = pesos.format(valorProductos);
+
+      if (!comuna.value) {
+        despacho.textContent = "Selecciona comuna";
+        total.textContent = "—";
+        mensaje.textContent = "Selecciona una comuna para calcular el total.";
+        return;
+      }
+
+      despacho.textContent = pesos.format(costoDespacho);
+      total.textContent = pesos.format(valorProductos + costoDespacho);
+      mensaje.textContent =
+        "Total en pesos chilenos, con IVA y despacho incluido.";
+    }
+
+    cantidad.addEventListener("input", actualizarTotal);
+    comuna.addEventListener("change", actualizarTotal);
+    actualizarTotal();
+  </script>
+</body>
+</html>
